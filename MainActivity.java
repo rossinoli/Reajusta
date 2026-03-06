@@ -14,7 +14,7 @@ import androidx.core.view.WindowInsetsCompat;
 
 public class MainActivity extends AppCompatActivity {
 
-    private EditText editSalario;
+    private EditText editNome, editSalario;
     private TextView txtSalarioAntes, txtPercentual, txtValorAumento, txtNovoSalario;
 
 
@@ -24,6 +24,7 @@ public class MainActivity extends AppCompatActivity {
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_main);
 
+        editNome = findViewById(R.id.editNome);
         editSalario = findViewById(R.id.editSalario);
         txtSalarioAntes = findViewById(R.id.txtSalarioAntes);
         txtPercentual = findViewById(R.id.txtPercentual);
@@ -38,6 +39,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void calcularReajuste(View view) {
+        String nome = editNome.getText().toString();
         String valorDigitado = editSalario.getText().toString();
 
         if (valorDigitado.isEmpty()) {
@@ -64,6 +66,14 @@ public class MainActivity extends AppCompatActivity {
         txtSalarioAntes.setText(String.format(Locale.getDefault(), "Salário antes: R$ %.2f", salarioAtual));
         txtPercentual.setText(String.format(Locale.getDefault(), "Percentual aplicado: %.0f%%", percentual));
         txtValorAumento.setText(String.format(Locale.getDefault(), "Valor do aumento: R$ %.2f", valorAumento));
-        txtNovoSalario.setText(String.format(Locale.getDefault(), "Novo salário: R$ %.2f", novoSalario));
+        txtNovoSalario.setText(String.format(Locale.getDefault(), "%s, seu novo salário é: R$ %.2f", nome, novoSalario));
+    }
+
+    public EditText getEditNome() {
+        return editNome;
+    }
+
+    public void setEditNome(EditText editNome) {
+        this.editNome = editNome;
     }
 }
